@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
+using Blog.Controllers.Models;
 using Microsoft.AspNetCore.Mvc;
-using Blog.Models;
+using Microsoft.Extensions.Logging;
 
 namespace Blog.Controllers;
 

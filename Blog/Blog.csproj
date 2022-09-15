@@ -7,7 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Data\Migrations" />
+      <Folder Include="Data" />
     </ItemGroup>
 
     <ItemGroup>
@@ -15,8 +15,11 @@
         <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.0" />
         <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.1" />
         <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.0" />
-        <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.1" />
-        <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.1" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Blog.Controllers\Blog.Controllers.csproj" />
+      <ProjectReference Include="..\Blog.Data\Blog.Data.csproj" />
     </ItemGroup>
 
 </Project>

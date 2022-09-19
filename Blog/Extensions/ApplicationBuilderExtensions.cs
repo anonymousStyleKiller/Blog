@@ -1,4 +1,7 @@
-﻿namespace Blog.Extensions;
+﻿using Blog.Data;
+using Microsoft.EntityFrameworkCore;
+
+namespace Blog.Extensions;
 
 public static class ApplicationBuilderExtensions
 {
@@ -25,5 +28,12 @@ public static class ApplicationBuilderExtensions
 
             endpoints.MapRazorPages();
         });
+    }
+
+    public static void SeedData(this IApplicationBuilder app)
+    {
+        using var serviceScope = app.ApplicationServices.CreateScope();
+        var db = serviceScope.ServiceProvider.GetService<BlogDbContext>();
+        db?.Database.Migrate();
     }
 }

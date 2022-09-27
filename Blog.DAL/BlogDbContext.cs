@@ -2,9 +2,9 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace Blog.Data;
+namespace Blog.DAL;
 
-public class BlogDbContext : IdentityDbContext
+public class BlogDbContext : IdentityDbContext<User>
 {
     public BlogDbContext(DbContextOptions<BlogDbContext> options) : base(options)
     {

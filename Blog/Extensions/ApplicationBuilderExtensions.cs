@@ -1,4 +1,4 @@
-﻿using Blog.Data;
+﻿using Blog.DAL;
 using Microsoft.EntityFrameworkCore;
 
 namespace Blog.Extensions;

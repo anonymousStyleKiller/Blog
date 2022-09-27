@@ -19,6 +19,7 @@
     <ItemGroup>
       <ProjectReference Include="..\Blog.Controllers\Blog.Controllers.csproj" />
       <ProjectReference Include="..\Blog.DAL\Blog.DAL.csproj" />
+      <ProjectReference Include="..\Blog.Services\Blog.Services.csproj" />
     </ItemGroup>
 
 </Project>

@@ -1,7 +1,7 @@
 ﻿using Blog.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Blog.Controllers;
+namespace Blog.Contollers;
 
 public class ArticlesController : Controller
 {
@@ -12,7 +12,7 @@ public class ArticlesController : Controller
         _articleServices = articleServices;
     }
 
-    public async Task<IActionResult> Index()
+    public async Task<IActionResult> GetAll()
     {
         return Ok(await _articleServices.GetArticles(1));
     }

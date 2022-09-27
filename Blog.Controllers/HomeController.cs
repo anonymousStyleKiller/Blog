@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-namespace Blog.Controllers;
+namespace Blog.Contollers;
 
 public class HomeController : Controller
 {

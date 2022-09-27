@@ -7,6 +7,6 @@ public static class ServiceExtension
 {
     public static void InitServices(this IServiceCollection serviceCollection)
     {
-        serviceCollection.AddTransient<IArticleServices, ArticleServices>();
+        serviceCollection.AddScoped<IArticleServices, ArticleServices>();
     }
 }

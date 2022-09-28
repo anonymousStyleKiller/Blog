@@ -29,14 +29,10 @@ public class ArticlesController : Controller
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Create(CreateArticleFormModel model)
     {
-        if (ModelState.IsValid)
-        {
-         
-           var articleId =  await _articleServices.AddAsync(model.Title, model.Description, User.GetUserId());
-           return RedirectToAction("Details", new {articleId,});
-        }
+        if (!ModelState.IsValid) return View(model);
+        var articleId =  await _articleServices.AddAsync(model.Title, model.Description, User.GetUserId());
+        return RedirectToAction("Details", new {articleId,});
 
-        return View(model);
     }
 
 }

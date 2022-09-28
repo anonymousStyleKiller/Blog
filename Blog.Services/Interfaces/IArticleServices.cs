@@ -7,4 +7,6 @@ public interface IArticleServices
     public Task<IEnumerable<ArticleListingServiceModel>> GetArticles(int page);
 
     public Task<int> AddAsync(string title, string description, string authorId);
+
+    Task<int> Edit(int id, string title, string description);
 }

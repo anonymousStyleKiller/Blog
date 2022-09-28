@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using static Blog.Data.DataValidation.Article;
+using static Blog.DAL.DataValidation.Article;
 
-namespace Blog.Data.Models;
+namespace Blog.DAL.Models;
 
 public class Article
 {

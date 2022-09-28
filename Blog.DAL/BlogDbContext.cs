@@ -1,4 +1,4 @@
-﻿using Blog.Data.Models;
+﻿using Blog.DAL.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 

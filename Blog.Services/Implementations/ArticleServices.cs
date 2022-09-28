@@ -1,5 +1,5 @@
 ﻿using Blog.DAL;
-using Blog.Data.Models;
+using Blog.DAL.Models;
 using Blog.Services.Interfaces;
 using Blog.Services.Models.Articles;
 using Microsoft.EntityFrameworkCore;

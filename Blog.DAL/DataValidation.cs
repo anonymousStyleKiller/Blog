@@ -1,4 +1,4 @@
-﻿namespace Blog.Data;
+﻿namespace Blog.DAL;
 
 public static class DataValidation
 {

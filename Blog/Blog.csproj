@@ -22,8 +22,4 @@
       <ProjectReference Include="..\Blog.Services\Blog.Services.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Views\Articles" />
-    </ItemGroup>
-
 </Project>

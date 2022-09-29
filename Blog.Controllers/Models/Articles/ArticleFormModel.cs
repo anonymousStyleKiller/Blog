@@ -3,7 +3,7 @@ using static Blog.DAL.DataValidation.Article;
 
 namespace Blog.Contollers.Models.Articles;
 
-public class CreateArticleFormModel
+public class ArticleFormModel
 {
    
    [Required] [MaxLength(MaxTitleLength)] public string Title { get; set; }

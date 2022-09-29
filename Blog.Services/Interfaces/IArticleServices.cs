@@ -4,9 +4,14 @@ namespace Blog.Services.Interfaces;
 
 public interface IArticleServices
 {
-    public Task<IEnumerable<ArticleListingServiceModel>> GetArticles(int page);
+    public Task<IEnumerable<ArticleListingServiceModel>> GetArticlesAsync(int page);
+    public Task<ArticleDetailsServiceModel?> GetDetailsAsync(int id);
 
     public Task<int> AddAsync(string title, string description, string authorId);
 
-    Task<int> Edit(int id, string title, string description);
+    Task<bool> EditAsync(int id, string title, string description);
+
+    Task<bool> ExistsAsync(int id, string authorId);
+
+    Task<bool> DeleteAsync(int id);
 }

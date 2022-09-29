@@ -16,7 +16,7 @@ public class ArticlesController : Controller
     
     public async Task<IActionResult> GetAll()
     {
-        return Ok(await _articleServices.GetArticles(1));
+        return Ok(await _articleServices.GetArticlesAsync(1));
     }
     
     [HttpGet]
@@ -27,12 +27,57 @@ public class ArticlesController : Controller
     [HttpPost]
     [Authorize]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Create(CreateArticleFormModel model)
+    public async Task<IActionResult> Create(ArticleFormModel model)
     {
         if (!ModelState.IsValid) return View(model);
         var articleId =  await _articleServices.AddAsync(model.Title, model.Description, User.GetUserId());
-        return RedirectToAction("Details", new {articleId,});
-
+        return RedirectToAction("Details", new {articleId, });
     }
 
+    [HttpGet]
+    [Authorize]
+    public async Task<IActionResult> Edit(int id)
+    {
+        if (await _articleServices.ExistsAsync(id, User.GetUserId())) return NotFound();
+        return View();
+    }
+
+    [HttpPost]
+    [Authorize]
+    public async Task<IActionResult> Edit(int id, ArticleFormModel model)
+    {
+        if (await _articleServices.ExistsAsync(id, User.GetUserId())) return NotFound();
+        if (!ModelState.IsValid) return View(model);
+        await _articleServices.EditAsync(id, model.Title, model.Description);
+        return RedirectToAction(nameof(Details), new {id, });
+    }
+
+    public async Task<IActionResult> Details(int id)
+    {
+       var article = await _articleServices.GetDetailsAsync(id);
+       if (article == null)
+       {
+           return NotFound();
+       }
+       return View(article);
+    }
+
+    [HttpGet]
+    [Authorize]
+    public async Task<IActionResult> Delete(int id)
+    {
+        if (!await _articleServices.ExistsAsync(id, User.GetUserId())) return NotFound();
+        return View();
+    }
+
+    [HttpPost]
+    [Authorize]
+
+    public async Task<IActionResult> ConfirmDelete(int id)
+    {
+        if (!await _articleServices.ExistsAsync(id, User.GetUserId())) return NotFound();
+        await _articleServices.DeleteAsync(id);
+        return RedirectToAction(nameof(GetAll));
+    }
+    
 }

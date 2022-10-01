@@ -1,4 +1,6 @@
-﻿using Blog.DAL;
+﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
+using Blog.DAL;
 using Blog.DAL.Models;
 using Blog.Services.Interfaces;
 using Blog.Services.Models.Articles;
@@ -10,10 +12,12 @@ public class ArticleServices : IArticleServices
 {
     private const int ArticlePageSize = 10;
     private readonly BlogDbContext _dbContext;
+    private readonly IMapper _mapper;
 
-    public ArticleServices(BlogDbContext dbContext)
+    public ArticleServices(BlogDbContext dbContext, IMapper mapper)
     {
         _dbContext = dbContext;
+        _mapper = mapper;
     }
 
     
@@ -23,24 +27,15 @@ public class ArticleServices : IArticleServices
                    .Articles
                    .Skip((page - 1) * ArticlePageSize)
                    .Take(ArticlePageSize)
-                   .Select(a => new ArticleListingServiceModel
-                   {
-                       Id = a.Id,
-                       Title = a.Title,
-                       Author = a.Author.UserName
-                   })
+                   .ProjectTo<ArticleListingServiceModel>(_mapper.ConfigurationProvider)
                    .ToListAsync();
     }
 
     public async Task<ArticleDetailsServiceModel?> GetDetailsAsync(int id) =>
         await _dbContext.Articles
-            .Where(a => a.Id == id).Select(a => new ArticleDetailsServiceModel
-            {
-                Id = a.Id,
-                Title = a.Title,
-                CreatedOn = a.CreatedOn,
-                Author = a.Author.UserName
-            }).FirstOrDefaultAsync();
+            .Where(a => a.Id == id)
+            .ProjectTo<ArticleDetailsServiceModel>(_mapper.ConfigurationProvider)
+            .FirstOrDefaultAsync();
     
 
     public async Task<int> AddAsync(string title, string description, string authorId)
@@ -53,7 +48,6 @@ public class ArticleServices : IArticleServices
         };
 
         _dbContext.Add(article);
-
         await _dbContext.SaveChangesAsync();
         return article.Id;
     }

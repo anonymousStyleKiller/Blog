@@ -1,4 +1,5 @@
-﻿using Blog.Services.Implementations;
+﻿using System.Reflection;
+using Blog.Services.Implementations;
 using Blog.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -6,9 +7,10 @@ namespace Blog.Extensions;
 
 public static class ServiceCollectionExtension
 {
-    public static void InitServices(this IServiceCollection serviceCollection)
+    public static void InitServices(this IServiceCollection services)
     {
-        serviceCollection.AddScoped<IArticleServices, ArticleServices>();
+        services.AddScoped<IArticleServices, ArticleServices>();
+        services.AddAutoMapper(Assembly.GetExecutingAssembly());
     }
 
     public static void AddMvc(this IServiceCollection serviceCollection)

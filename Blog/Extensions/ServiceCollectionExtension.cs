@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using Blog.Services.Common;
 using Blog.Services.Implementations;
 using Blog.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -13,10 +14,43 @@ public static class ServiceCollectionExtension
         services.AddAutoMapper(Assembly.GetExecutingAssembly());
     }
 
-    public static void AddMvc(this IServiceCollection serviceCollection)
+    public static void AddConventionalServices(this IServiceCollection services)
     {
-        serviceCollection.AddControllersWithViews(opt=>opt.Filters.Add(new AutoValidateAntiforgeryTokenAttribute()));
-        serviceCollection.AddRazorPages();
+        var serviceInterfaceType = typeof(IService);
+        var scopedServiceInterfaceType = typeof(IScopedService);
+        var singletonServiceInterfaceType = typeof(ISingletonService);
+
+        var types = serviceInterfaceType
+            .Assembly
+            .GetExportedTypes()
+            .Where(t => t.IsClass && !t.IsAbstract)
+            .Select(t => new
+            {
+                Service = t.GetInterface($"I{t.Name}"),
+                Implementation = t
+            })
+            .Where(t => t.Service != null);
+
+        foreach (var type in types)
+        {
+            if (serviceInterfaceType.IsAssignableFrom(type.Service))
+            {
+                services.AddTransient(type.Service, type.Implementation);
+            }
+            else if (scopedServiceInterfaceType.IsAssignableFrom(type.Service))
+            { 
+                services.AddSingleton(type.Service, type.Implementation);
+            }
+            else if (singletonServiceInterfaceType.IsAssignableFrom(type.Service))
+            { 
+                services.AddScoped(type.Service, type.Implementation);
+            }
+        }
     }
-    
+
+    public static void AddMvc(this IServiceCollection services)
+    {
+        services.AddControllersWithViews(opt => opt.Filters.Add(new AutoValidateAntiforgeryTokenAttribute()));
+        services.AddRazorPages();
+    }
 }

@@ -1,8 +1,9 @@
-﻿using Blog.Services.Models.Articles;
+﻿using Blog.Services.Common;
+using Blog.Services.Models.Articles;
 
 namespace Blog.Services.Interfaces;
 
-public interface IArticleServices
+public interface IArticleServices : IService
 {
     public Task<IEnumerable<ArticleListingServiceModel>> GetArticlesAsync(int page);
     public Task<ArticleDetailsServiceModel?> GetDetailsAsync(int id);

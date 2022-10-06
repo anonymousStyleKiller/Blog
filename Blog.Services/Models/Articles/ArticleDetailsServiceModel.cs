@@ -1,6 +1,9 @@
-﻿namespace Blog.Services.Models.Articles;
+﻿using Blog.Common.Mapping;
+using Blog.DAL.Models;
 
-public class ArticleDetailsServiceModel
+namespace Blog.Services.Models.Articles;
+
+public class ArticleDetailsServiceModel  : IMapFrom<Article>, IMapExplicitly
 {
     public int Id { get; set; }
     public string Title { get; set; }

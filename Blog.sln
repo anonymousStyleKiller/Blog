@@ -8,6 +8,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blog.DAL", "Blog.DAL\Blog.D
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blog.Services", "Blog.Services\Blog.Services.csproj", "{F93E73AB-D431-4997-942F-1257D99FF4F9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blog.Common", "Blog.Common\Blog.Common.csproj", "{4CEFF983-AE09-41B3-8D89-7FE445D2FEBB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,9 @@ Global
 		{F93E73AB-D431-4997-942F-1257D99FF4F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F93E73AB-D431-4997-942F-1257D99FF4F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F93E73AB-D431-4997-942F-1257D99FF4F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4CEFF983-AE09-41B3-8D89-7FE445D2FEBB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4CEFF983-AE09-41B3-8D89-7FE445D2FEBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4CEFF983-AE09-41B3-8D89-7FE445D2FEBB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4CEFF983-AE09-41B3-8D89-7FE445D2FEBB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

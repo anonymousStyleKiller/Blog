@@ -21,17 +21,21 @@ public class HomeControllerTest
     [Fact]
     public void PrivacyShouldReturnViewResultWithCorrectUsername()
     {
+        const string userName = "Test";
+        
         var homeController = new HomeController();
         homeController.ControllerContext = new ControllerContext
         {
             HttpContext = new DefaultHttpContext
             {
-                User = new ClaimsPrincipal(new ClaimsIdentity(new List<Claim>{new(ClaimTypes.Name, "Test")}))
+                User = new ClaimsPrincipal(new ClaimsIdentity(new List<Claim>{new(ClaimTypes.Name, userName)}))
             }
         };
         var result = homeController.Privacy();
         var viewResult = Assert.IsType<ViewResult>(result);
         var model = Assert.IsType<PrivacyViewModel>(viewResult.Model);
+        
+        Assert.Equal(userName, model.UserName);
         
     }
 }

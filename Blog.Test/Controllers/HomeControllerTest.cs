@@ -11,7 +11,7 @@ public class HomeControllerTest
     [Fact]
     public void ShouldReturnViewResult()
     {
-        var homeController = new HomeController();
+        var homeController = new HomeController(null);
       
         var result = homeController.About();
         
@@ -22,8 +22,8 @@ public class HomeControllerTest
     public void PrivacyShouldReturnViewResultWithCorrectUsername()
     {
         const string userName = "Test";
+        var homeController = new HomeController(null);
         
-        var homeController = new HomeController();
         homeController.ControllerContext = new ControllerContext
         {
             HttpContext = new DefaultHttpContext

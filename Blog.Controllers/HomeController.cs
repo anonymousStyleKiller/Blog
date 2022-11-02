@@ -1,22 +1,14 @@
-﻿using AutoMapper;
-using Blog.Contollers.Models;
-using Blog.DAL;
-using Blog.Services.Implementations;
+﻿using Blog.Contollers.Models;
 using Blog.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 
 namespace Blog.Contollers;
 
 public class HomeController : Controller
 {
     private readonly IArticleServices _articleServices;
-    private readonly BlogDbContext _context;
-    private readonly IMapper _mapper;
-    public HomeController()
-    {
-    }
+    public HomeController(IArticleServices articleServices) => _articleServices = articleServices;
 
     public async Task<IActionResult> Index()
     {
@@ -31,7 +23,4 @@ public class HomeController : Controller
     {
         UserName = User.Identity.Name
     });
-
-
-
 }

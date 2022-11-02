@@ -31,7 +31,7 @@ public class ArticleServices : IArticleServices
                    .ToListAsync();
     }
 
-    public async Task<ArticleDetailsServiceModel?> GetDetailsAsync(int id) =>
+    public async Task<ArticleDetailsServiceModel> GetDetailsAsync(int id) =>
         await _dbContext.Articles
             .Where(a => a.Id == id)
             .ProjectTo<ArticleDetailsServiceModel>(_mapper.ConfigurationProvider)

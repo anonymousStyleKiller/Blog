@@ -10,7 +10,8 @@ public static class ServiceCollectionExtension
 {
     public static void InitServices(this IServiceCollection services)
     {
-        services.AddScoped<IArticleServices, ArticleServices>();
+        services.AddTransient<IArticleServices, ArticleServices>();
+        services.AddTransient<IImageService, ImageService>();
         services.AddAutoMapper(Assembly.GetExecutingAssembly());
     }
 

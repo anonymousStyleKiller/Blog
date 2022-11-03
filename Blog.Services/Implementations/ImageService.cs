@@ -1,8 +1,10 @@
-﻿namespace Blog.Services.Implementations;
+﻿using Blog.Services.Interfaces;
 
-public  static class ImageService 
+namespace Blog.Services.Implementations;
+
+public  class ImageService : IImageService
 {
-    public static Task UpdateImage(string pictureUrl, string userImageDestination)
+    public Task UpdateImage(string imageUrl, string destination, int? width = null, int? height = null)
     {
         throw new NotImplementedException();
     }

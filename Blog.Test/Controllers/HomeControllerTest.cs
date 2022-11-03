@@ -2,6 +2,7 @@
 using Blog.Contollers;
 using Blog.Contollers.Models;
 using Blog.Services.Models.Articles;
+using Blog.Test.Extensions;
 using Blog.Test.Fakes;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -34,15 +35,7 @@ public class HomeControllerTest
     public void PrivacyShouldReturnViewResultWithCorrectUsername()
     {
         const string userName = "Test";
-        var homeController = new HomeController(null);
-        
-        homeController.ControllerContext = new ControllerContext
-        {
-            HttpContext = new DefaultHttpContext
-            {
-                User = new ClaimsPrincipal(new ClaimsIdentity(new List<Claim>{new(ClaimTypes.Name, userName)}))
-            }
-        };
+        var homeController = new HomeController(null).WithTestUser();
         var result = homeController.Privacy();
         var viewResult = Assert.IsType<ViewResult>(result);
         var model = Assert.IsType<PrivacyViewModel>(viewResult.Model);

@@ -8,4 +8,9 @@ public  class ImageService : IImageService
     {
         throw new NotImplementedException();
     }
+
+    internal (int width, int heigth) CalculateOptimaSize(int width, int height)
+    {
+        return (width, height);
+    }
 }

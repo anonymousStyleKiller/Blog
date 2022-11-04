@@ -14,5 +14,11 @@
     <ItemGroup>
       <PackageReference Include="AutoMapper" Version="12.0.0" />
     </ItemGroup>
+    
+    <ItemGroup>
+        <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
+            <_Parameter1>Blog.Test</_Parameter1>
+        </AssemblyAttribute>
+    </ItemGroup>
 
 </Project>

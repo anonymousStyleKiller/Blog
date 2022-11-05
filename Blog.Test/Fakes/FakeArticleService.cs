@@ -21,12 +21,12 @@ public class FakeArticleService : IArticleServices
         throw new NotImplementedException();
     }
 
-    public Task<int> AddAsync(string title, string description, string authorId)
+    public Task<int> AddAsync(string? title, string? description, string authorId)
     {
         throw new NotImplementedException();
     }
 
-    public Task<bool> EditAsync(int id, string title, string description)
+    public Task<bool> EditAsync(int id, string? title, string? description)
     {
         throw new NotImplementedException();
     }

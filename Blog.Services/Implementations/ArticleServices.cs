@@ -20,6 +20,10 @@ public class ArticleServices : IArticleServices
         _mapper = mapper;
     }
 
+    public ArticleServices(BlogDbContext dbContext)
+    {
+        _dbContext = dbContext;
+    }
     
     public async Task<IEnumerable<ArticleListingServiceModel>> GetArticlesAsync(int page)
     {
@@ -31,14 +35,14 @@ public class ArticleServices : IArticleServices
                    .ToListAsync();
     }
 
-    public async Task<ArticleDetailsServiceModel> GetDetailsAsync(int id) =>
+    public async Task<ArticleDetailsServiceModel?> GetDetailsAsync(int id) =>
         await _dbContext.Articles
             .Where(a => a.Id == id)
             .ProjectTo<ArticleDetailsServiceModel>(_mapper.ConfigurationProvider)
             .FirstOrDefaultAsync();
     
 
-    public async Task<int> AddAsync(string title, string description, string authorId)
+    public async Task<int> AddAsync(string? title, string? description, string authorId)
     {
         var article = new Article
         {
@@ -52,7 +56,7 @@ public class ArticleServices : IArticleServices
         return article.Id;
     }
     
-    public async Task<bool> EditAsync(int id, string title, string description)
+    public async Task<bool> EditAsync(int id, string? title, string? description)
     {
         var article = await _dbContext.Articles.FindAsync(id);
         if (article == null) return false;

@@ -6,6 +6,10 @@ namespace Blog.DAL;
 
 public class BlogDbContext : IdentityDbContext<User>
 {
+    public BlogDbContext()
+    {
+        
+    }
     public BlogDbContext(DbContextOptions<BlogDbContext> options) : base(options)
     {
     }

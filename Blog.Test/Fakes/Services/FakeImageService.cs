@@ -1,6 +1,6 @@
 ﻿using Blog.Services.Interfaces;
 
-namespace Blog.Test.Fakes;
+namespace Blog.Test.Fakes.Services;
 
 public class FakeImageService : IImageService
 {

@@ -2,7 +2,7 @@
 using Blog.Services.Implementations;
 using Blog.Test.Constants;
 using Blog.Test.Extensions;
-using Blog.Test.Fakes;
+using Blog.Test.Fakes.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Blog.Test.Controllers;

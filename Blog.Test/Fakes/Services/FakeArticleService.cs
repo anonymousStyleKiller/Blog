@@ -1,7 +1,7 @@
 ﻿using Blog.Services.Interfaces;
 using Blog.Services.Models.Articles;
 
-namespace Blog.Test.Fakes;
+namespace Blog.Test.Fakes.Services;
 
 public class FakeArticleService : IArticleServices
 {

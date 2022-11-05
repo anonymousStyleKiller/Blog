@@ -6,5 +6,7 @@
     &lt;TestId&gt;xUnit::9358F61B-014C-4DAF-9CDE-BEEA0411436C::net6.0::Blog.Test.Controllers.UsersControllerTest.ChangeProfilePictureWithNonNullPictureUrlShouldReturnOk&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;xUnit::9358F61B-014C-4DAF-9CDE-BEEA0411436C::net6.0::Blog.Test.Services.ImageServiceTest.CalculateOptimalSizeShouldReturnMinimumSizeWhenSizeThanAllowMinimum&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;xUnit::9358F61B-014C-4DAF-9CDE-BEEA0411436C::net6.0::Blog.Test.Services.ArticleServiceTest.IsByUserShouldReturnTrueWhenArticleBySpecificUserExists&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::9358F61B-014C-4DAF-9CDE-BEEA0411436C::net6.0::Blog.Test.Services.ArticleServiceTest.IsByUserShouldReturnFalseWhenArticleBySpecificUserExists&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::9358F61B-014C-4DAF-9CDE-BEEA0411436C::net6.0::Blog.Test.Services.ArticleServiceTest&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>

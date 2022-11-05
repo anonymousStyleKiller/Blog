@@ -3,7 +3,7 @@ using Blog.Contollers;
 using Blog.Contollers.Models;
 using Blog.Services.Models.Articles;
 using Blog.Test.Extensions;
-using Blog.Test.Fakes;
+using Blog.Test.Fakes.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 

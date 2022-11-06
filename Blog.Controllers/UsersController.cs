@@ -1,7 +1,7 @@
-﻿using Blog.Services.Implementations;
-using Blog.Services.Interfaces;
+﻿using Blog.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using FileSystem = System.IO.File;
 
 namespace Blog.Contollers;
 
@@ -15,6 +15,15 @@ public class UsersController  : Controller
     public UsersController(IImageService imageService)
     {
         _imageService = imageService;
+    }
+
+    [Authorize]
+    [HttpGet]
+    public async Task<IActionResult> GetProfilePicture()
+    {
+        var userImageDestination = string.Format($"{UserImageDestination}_optimized.jpg", User.Identity.Name);
+        await using var file = FileSystem.OpenRead(userImageDestination);
+        return File(file, ImageContentType);
     }
 
     [Authorize]

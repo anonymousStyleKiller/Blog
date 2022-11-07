@@ -1,5 +1,7 @@
-﻿using Blog.DAL.Models;
+﻿using AutoMapper;
+using Blog.DAL.Models;
 using Blog.Services.Implementations;
+using Blog.Services.Infrastructure;
 using Blog.Test.Fakes.DbContext;
 
 
@@ -23,6 +25,16 @@ public class ArticleServiceTest
         Assert.False(exists);
     }
 
+    [Fact]
+    public async Task AllShouldReturnCorrectArticleWithDefaultParameters()
+    {
+        var articleServices = await GetArticleService("AllArticleWithDefaultParameters");
+        var articles = await articleServices.GetAll();
+        var article = Assert.Single(articles);
+        Assert.NotNull(article);
+        Assert.Equal(2, article.Id);
+    }
+
     private async Task AddFakeArticles(FakeBlogDbContext dbContext)
         => await dbContext.AddAsync(new Article
         {
@@ -35,6 +47,7 @@ public class ArticleServiceTest
     {
         var dbContext = new FakeBlogDbContext(name);
         await AddFakeArticles(dbContext);
-        return new ArticleServices(dbContext.Data);
+        var mapper = new Mapper(new MapperConfiguration(configure => configure.AddProfile<ServiceMappingProfile>()));
+        return new ArticleServices(dbContext.Data, mapper);
     }
 }

@@ -30,7 +30,7 @@ public static class ServiceCollectionExtension
             .Select(t => new
             {
                 Service = t.GetInterface($"I{t.Name}"),
-                Implementation = t
+                Implementation = t,
             })
             .Where(t => t.Service != null);
 

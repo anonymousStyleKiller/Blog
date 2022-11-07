@@ -14,7 +14,7 @@ public class UsersControllerTest
     [Fact]
     public async  Task ChangeProfilePictureWithNullPictureUrlShouldReturnBadRequest()
     {
-        var userController = new UsersController(null,null);
+        var userController = new UsersController(null, null);
         var result = await userController.ChangeProfilePicture(null);
         var badRequestResult = Assert.IsType<BadRequestObjectResult>(result);
         Assert.Equal("Image url cannot be empty", badRequestResult.Value);

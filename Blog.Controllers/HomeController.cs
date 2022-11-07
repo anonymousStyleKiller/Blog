@@ -21,6 +21,6 @@ public class HomeController : Controller
     [Authorize]
     public IActionResult Privacy() => View(new PrivacyViewModel
     {
-        UserName = User.Identity.Name
+        UserName = User.Identity?.Name
     });
 }

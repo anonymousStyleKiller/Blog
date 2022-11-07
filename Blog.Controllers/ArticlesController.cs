@@ -18,13 +18,13 @@ public class ArticlesController : Controller
     {
         return Ok(await _articleServices.GetArticlesAsync(1));
     }
-    
-    [HttpGet]
-    [Authorize]
-    public async Task<IActionResult> Create() => View();
 
-    
-    [HttpPost]
+  [HttpGet]
+  [Authorize]
+  public IActionResult Create() => View();
+
+
+  [HttpPost]
     [Authorize]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Create(ArticleFormModel model)

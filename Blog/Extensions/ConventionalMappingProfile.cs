@@ -10,7 +10,7 @@ public class ConventionalMappingProfile : Profile
         var mapFromType = typeof(IMapFrom<>);
         var mapToType = typeof(IMapTo<>);
         var explicitMapType = typeof(IMapTo<>);
-        var modelTypes = AppDomain
+        AppDomain
             .CurrentDomain
             .GetAssemblies()
             .Where(a =>

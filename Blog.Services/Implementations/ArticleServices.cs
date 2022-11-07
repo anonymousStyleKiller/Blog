@@ -20,12 +20,9 @@ public class ArticleServices : IArticleServices
         _mapper = mapper;
     }
 
-    public ArticleServices(BlogDbContext dbContext)
-    {
-        _dbContext = dbContext;
-    }
-    
-    public async Task<IEnumerable<ArticleListingServiceModel>> GetArticlesAsync(int page)
+  public ArticleServices(BlogDbContext dbContext) => _dbContext = dbContext;
+
+  public async Task<IEnumerable<ArticleListingServiceModel>> GetArticlesAsync(int page)
     {
         return await _dbContext
                    .Articles
@@ -34,6 +31,15 @@ public class ArticleServices : IArticleServices
                    .ProjectTo<ArticleListingServiceModel>(_mapper.ConfigurationProvider)
                    .ToListAsync();
     }
+  
+  public async Task<IEnumerable<ArticleListingServiceModel>> GetAll()
+  {
+      return await _dbContext
+                 .Articles
+                 .AsQueryable()
+                 .ProjectTo<ArticleListingServiceModel>(_mapper.ConfigurationProvider)
+                 .ToListAsync();
+  }
 
     public async Task<ArticleDetailsServiceModel?> GetDetailsAsync(int id) =>
         await _dbContext.Articles

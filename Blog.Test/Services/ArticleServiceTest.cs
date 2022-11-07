@@ -31,6 +31,7 @@ public class ArticleServiceTest
         var articleServices = await GetArticleService("AllArticleWithDefaultParameters");
         var articles = await articleServices.GetAll();
         var article = Assert.Single(articles);
+        var x = 0;
         Assert.NotNull(article);
         Assert.Equal(2, article.Id);
     }

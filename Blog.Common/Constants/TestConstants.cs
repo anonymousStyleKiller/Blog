@@ -1,4 +1,4 @@
-﻿namespace Blog.Test.Constants;
+﻿namespace Blog.Common.Constants;
 
 public class TestConstants
 {

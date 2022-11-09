@@ -1,4 +1,4 @@
-﻿using Blog.Services.Implementations;
+﻿using Blog.Common.Constants;
 using Blog.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -7,14 +7,22 @@ namespace Blog.Contollers;
 
 public class UsersController  : Controller
 {
-    private const string UserImageDestination = @"Images\Users\{0}";
-    private const string ImageContentType = "image/jpeg";
     private readonly IImageService _imageService;
-
-
-    public UsersController(IImageService imageService)
+    private readonly IFileSystemService _fileSystemService;
+    
+    public UsersController(IImageService imageService, IFileSystemService fileSystemService)
     {
         _imageService = imageService;
+        _fileSystemService = fileSystemService;
+    }
+
+    [Authorize]
+    [HttpGet]
+    public async Task<IActionResult> GetProfilePicture()
+    {
+        var userImageDestination = $"{ControllerConstants.UserImageDestination}{User.Identity?.Name}_optimized.jpg";
+        await using var file = _fileSystemService.OpenRead(userImageDestination);
+        return File(file, ControllerConstants.ImageContentType);
     }
 
     [Authorize]
@@ -22,8 +30,7 @@ public class UsersController  : Controller
     public async Task<IActionResult> ChangeProfilePicture(string pictureUrl)
     {
         if (string.IsNullOrWhiteSpace(pictureUrl)) return BadRequest("Image url cannot be empty");
-
-        var userImageDestination = string.Format(UserImageDestination, User.Identity.Name);
+        var userImageDestination = string.Format(ControllerConstants.UserImageDestination, User.Identity?.Name);
         await _imageService.UpdateImage(pictureUrl, userImageDestination);
         return Ok();
     }

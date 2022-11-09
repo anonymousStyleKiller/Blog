@@ -7,8 +7,8 @@ namespace Blog.Services.Models.Articles;
 public class ArticleListingServiceModel : IMapFrom<Article>, IMapExplicitly
 {
     public int Id { get; set; }
-    public string Title { get; set; }
-    public string Author { get; set; }
+    public string? Title { get; set; }
+    public string? Author { get; set; }
 
     public void RegisterMapping(IProfileExpression profile)
     {

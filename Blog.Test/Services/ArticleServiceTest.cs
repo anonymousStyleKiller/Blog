@@ -1,11 +1,12 @@
-﻿using Blog.DAL.Models;
+﻿using AutoMapper;
 using Blog.Services.Implementations;
-using Blog.Test.Fakes.DbContext;
-
+using Blog.Services.Infrastructure;
+using Blog.Test.Common;
+using Blog.Test.Fakes.Services;
 
 namespace Blog.Test.Services;
 
-public class ArticleServiceTest
+public class ArticleServiceTest : TestWithData
 {
     [Fact]
     public async Task IsByUserShouldReturnTrueWhenArticleBySpecificUserExists()
@@ -13,6 +14,18 @@ public class ArticleServiceTest
         var articleService = await GetArticleService("ArticleDbContextShouldTrue");
         var exists = await articleService.ExistsAsync(1, "1");
         Assert.True(exists);
+    }
+
+    [Fact]
+    public async Task ChangeVisibilityShouldCorrectPublishedOnDate()
+    {
+        const int articleId = 1;
+        var articleService = await GetArticleService("ChangeVisibility");
+        await articleService.ChangeVisibility(1);
+        var article = await Database.Articles.FindAsync(articleId);
+        Assert.NotNull(article);
+        Assert.True(article.IsPublic); 
+        Assert.Equal(new DateTime(2022, 11, 9).DayOfWeek, article.PublishedOn.DayOfWeek);
     }
     
     [Fact]
@@ -22,19 +35,16 @@ public class ArticleServiceTest
         var exists = await articleService.ExistsAsync(3, "1");
         Assert.False(exists);
     }
-
-    private async Task AddFakeArticles(FakeBlogDbContext dbContext)
-        => await dbContext.AddAsync(new Article
-        {
-            Id = 1,
-            AuthorId = "1",
-            Title = "Test article"
-        });
+    
 
     private async Task<ArticleServices> GetArticleService(string name)
     {
-        var dbContext = new FakeBlogDbContext(name);
-        await AddFakeArticles(dbContext);
-        return new ArticleServices(dbContext.Data);
+        await InitDb(name);
+        var mapper = new Mapper(new MapperConfiguration(config =>
+        {
+            config.AddProfile<ServiceMappingProfile>();
+        }));
+        
+        return new ArticleServices(Database, mapper, new FakeDateTimeService());
     }
 }

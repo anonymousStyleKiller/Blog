@@ -11,4 +11,6 @@ public class Article
     [MaxLength(MaxTitleLength)] public string? Description { get; set; }
     public DateTime CreatedOn { get; set; }
     public User? Author { get; set; }
+    public bool IsPublic  { get; set; }
+    public DateTime PublishedOn = DateTime.UtcNow;
 }

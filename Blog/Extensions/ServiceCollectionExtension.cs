@@ -10,8 +10,10 @@ public static class ServiceCollectionExtension
 {
     public static void InitServices(this IServiceCollection services)
     {
-        services.AddTransient<IArticleServices, ArticleServices>();
-        services.AddTransient<IImageService, ImageService>();
+        services
+            .AddTransient<IArticleServices, ArticleServices>()
+            .AddTransient<IImageService, ImageService>()
+            .AddTransient<IDateTimeService, DateTimeService>();
         services.AddAutoMapper(Assembly.GetExecutingAssembly());
     }
 
@@ -39,11 +41,11 @@ public static class ServiceCollectionExtension
                 services.AddTransient(type.Service, type.Implementation);
             }
             else if (scopedServiceInterfaceType.IsAssignableFrom(type.Service))
-            { 
+            {
                 services.AddSingleton(type.Service, type.Implementation);
             }
             else if (singletonServiceInterfaceType.IsAssignableFrom(type.Service))
-            { 
+            {
                 services.AddScoped(type.Service, type.Implementation);
             }
         }

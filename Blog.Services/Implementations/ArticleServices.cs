@@ -12,17 +12,20 @@ public class ArticleServices : IArticleServices
 {
     private const int ArticlePageSize = 10;
     private readonly BlogDbContext _dbContext;
+    private readonly IDateTimeService _dateTimeService;
     private readonly IMapper _mapper;
 
-    public ArticleServices(BlogDbContext dbContext, IMapper mapper)
+    public ArticleServices(BlogDbContext dbContext, IMapper mapper, IDateTimeService dateTimeService)
     {
         _dbContext = dbContext;
         _mapper = mapper;
+        _dateTimeService = dateTimeService;
     }
 
-    public ArticleServices(BlogDbContext dbContext)
+    public ArticleServices(BlogDbContext dbContext, IDateTimeService dateTimeService)
     {
         _dbContext = dbContext;
+        _dateTimeService = dateTimeService;
     }
     
     public async Task<IEnumerable<ArticleListingServiceModel>> GetArticlesAsync(int page)
@@ -76,6 +79,15 @@ public class ArticleServices : IArticleServices
         _dbContext.Articles.Remove(article);
         await _dbContext.SaveChangesAsync();
         return true;
+    }
+
+    public async Task ChangeVisibility(int id)
+    {
+        var article = await _dbContext.Articles.FindAsync(id);
+        if(article == null)return;
+        article.IsPublic = !article.IsPublic;
+        if(article.PublishedOn == null) article.PublishedOn = _dateTimeService.Now();
+        await _dbContext.SaveChangesAsync().ConfigureAwait(false);
     }
     
     
